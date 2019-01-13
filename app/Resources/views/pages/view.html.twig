@@ -1,0 +1,14 @@
+{{include('pages/inc/header.html.twig')}}
+  <br/>
+  
+  <h3>View Post</h3>
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">POST</a>
+  <a href="#" class="list-group-item list-group-item-action">{{ postData.title }}</a>
+  <a href="#" class="list-group-item list-group-item-action">{{ postData.description }}</a>
+  <a href="#" class="list-group-item list-group-item-action">{{ postData.category }}</a>
+  <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">BACK</a>
+  </div>
+
+{{include('pages/inc/footer.html.twig')}}

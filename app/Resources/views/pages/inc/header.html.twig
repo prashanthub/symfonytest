@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Symfony 3 CRUD</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet"  href="{{ absolute_url(asset('css/bootstrap.min.css')) }}" />
+    </head>
+    <body>
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		  <a class="navbar-brand" href="#">Symfony 3 CRUD</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		</nav>
+		<br>
+		<div class="container">
+		{% for success_message in app.session.flashbag.get('message') %}
+			<div class="alert alert-success">
+				{{ success_message }}
+			</div>
+		{% endfor %}
