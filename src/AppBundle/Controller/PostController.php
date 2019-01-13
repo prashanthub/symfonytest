@@ -34,6 +34,7 @@ class PostController extends Controller
         ->add('save',SubmitType::class,array('label'=>'Create Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
+        s
         if($form->isValid() && $form->isSubmitted()){
             $title=$form['title']->getData();
             $description=$form['description']->getData();
@@ -108,6 +109,7 @@ class PostController extends Controller
         $postToRemove=$em->getRepository('AppBundle:Post')->find($id);
         $em->remove($postToRemove);
         $em->flush();
+
         $this->addFlash('message', 'Post Deleted Successfully.');
         return $this->redirectToRoute('view_all_posts');
     }
