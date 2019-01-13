@@ -34,7 +34,7 @@ class PostController extends Controller
         ->add('save',SubmitType::class,array('label'=>'Create Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
-        s
+        
         if($form->isValid() && $form->isSubmitted()){
             $title=$form['title']->getData();
             $description=$form['description']->getData();

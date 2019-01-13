@@ -1,0 +1,24 @@
+Download and install symfony:
+ https://symfony.com/doc/3.3/setup.html
+
+SYMFONY 3 CRUD OPERATION Tutorial:
+ https://www.youtube.com/watch?v=eY-edPAF93k
+
+Free Bootstrap Template : https://bootswatch.com/
+https://bootswatch.com/lumen/
+
+php bin/console - to show all the commands
+Entity(models) means table model
+
+php bin/console server:run
+php bin/console generate:controller
+php bin/console doctrine:database:create
+php bin/console doctrine:generate:entity (folder for table creation)
+php bin/console doctrine:generate:entities AppBundle:Post (for generating the getter and setter methods inside entity/model after creating a new field inside entity)
+/////////////////////////generate:(table-columns)('BUNDLE_NAME:ENTITY_NAME')
+php bin/console doctrine:schema:update --force (like migration in laravel)
+php bin/console doctrine:schema:update --dump-sql (dump sql is used to show the sql command in the terminal which is going to run)
+
+
+$this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+///////////////////////////////('BUNDLE_NAME:ENTITY_NAME')///////
