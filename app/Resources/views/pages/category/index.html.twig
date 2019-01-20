@@ -1,0 +1,31 @@
+{{include('pages/inc/header.html.twig')}}
+  <br/>
+  <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">Posts</a>
+  <h3>View Categories</h3>
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for categorie in categories %}
+    <tr class="table-active">
+      <th scope="row">{{ categorie.id }}</th>
+      <td>{{ categorie.name }}</td>
+      <td>
+      	<a href="{{ absolute_url(asset('')) }}category/delete/{{categorie.id}}" class="btn btn-danger btn-xs">Delete</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr class="table-active">
+      <td>No Category Found</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+</div>
+{{include('pages/inc/footer.html.twig')}}

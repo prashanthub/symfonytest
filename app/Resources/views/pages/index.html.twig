@@ -1,6 +1,7 @@
 {{include('pages/inc/header.html.twig')}}
   <br/>
   <a href="{{ absolute_url(asset('')) }}create" class="btn btn-primary btn-xs">Create Post</a>
+  <a href="{{ absolute_url(asset('')) }}category" class="btn btn-primary btn-xs">View Categories</a>
   <h3>View Posts</h3>
 
   <table class="table table-hover">
@@ -10,6 +11,7 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Category</th>
+      <th scope="col">Image</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -19,7 +21,13 @@
       <th scope="row">{{ post.id }}</th>
       <td>{{ post.title }}</td>
       <td>{{ post.description }}</td>
-      <td>{{ post.category }}</td>
+      <td>{{ post.category.name }}</td>
+      <td>{% if post.image!='' %}
+              <img style="width:50px;height:50px;" src="{{ absolute_url(asset('uploads/photos/')) }}{{post.image}}">
+        {% else %}
+              No Image
+        {% endif %}
+      </td>
       <td>
       	<a href="{{ absolute_url(asset('')) }}view/{{post.id}}" class="btn btn-primary btn-xs">View</a>
       	<a href="{{ absolute_url(asset('')) }}edit/{{post.id}}" class="btn btn-success btn-xs">Edit</a>

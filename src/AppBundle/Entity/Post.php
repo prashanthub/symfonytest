@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -35,12 +36,20 @@ class Post
      */
     private $description;
 
+
     /**
-     * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="post")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $category;
+
+
+    /**
+     * @ORM\Column(name="image", type="string", length=255)
+     *
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg"  })
+     */
+    private $image;
 
 
     /**
@@ -101,14 +110,16 @@ class Post
         return $this->description;
     }
 
+
+
     /**
      * Set category
      *
-     * @param string $category
+     * @param \AppBundle\Entity\Category $category
      *
      * @return Post
      */
-    public function setCategory($category)
+    public function setCategory(\AppBundle\Entity\Category $category = null)
     {
         $this->category = $category;
 
@@ -118,10 +129,34 @@ class Post
     /**
      * Get category
      *
-     * @return string
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Post
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

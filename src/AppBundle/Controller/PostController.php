@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PostController extends Controller
 {
@@ -27,10 +29,16 @@ class PostController extends Controller
     public function createPostAction(Request $request)
     {   
         $post = new Post;
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($post)
         ->add('title',TextType::class,array('attr'=>array('class'=>'form-control')))
         ->add('description',TextareaType::class,array('attr'=>array('class'=>'form-control')))
-        ->add('category',TextType::class,array('attr'=>array('class'=>'form-control')))
+        // add category select option
+        ->add('category', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Category',
+        'choice_label' => 'name'
+        ))
+        ->add('image', FileType::class, array('label' => 'Upload File (Image file)',  'required' => false, 'attr'=>array('class'=>'form-control')))
         ->add('save',SubmitType::class,array('label'=>'Create Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
@@ -39,6 +47,15 @@ class PostController extends Controller
             $title=$form['title']->getData();
             $description=$form['description']->getData();
             $category=$form['category']->getData();
+            // image upload start
+            $file = $post->getImage();
+            $post->setImage("");
+            if($file){
+            $fileName = md5(uniqid()).'.'.$file->guessExtension(); 
+            $file->move($this->getParameter('photos_directory'), $fileName); 
+            $post->setImage($fileName);
+            }
+            // image upload end
             $post->setTitle($title);
             $post->setDescription($description);
             $post->setCategory($category);
@@ -74,7 +91,11 @@ class PostController extends Controller
         $form = $this->createFormBuilder($post)
         ->add('title',TextType::class,array('attr'=>array('class'=>'form-control')))
         ->add('description',TextareaType::class,array('attr'=>array('class'=>'form-control')))
-        ->add('category',TextType::class,array('attr'=>array('class'=>'form-control')))
+        ->add('category', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Category',
+        'choice_label' => 'name'
+        ))
         ->add('save',SubmitType::class,array('label'=>'Update Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);

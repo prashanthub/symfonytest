@@ -1,24 +1,46 @@
+GITHUB REPO : https://github.com/prashanthub/symfonytest
+
 Download and install symfony:
  https://symfony.com/doc/3.3/setup.html
-
+SYMFONY 3 :
+https://www.tutorialspoint.com/symfony/
 SYMFONY 3 CRUD OPERATION Tutorial:
- https://www.youtube.com/watch?v=eY-edPAF93k
+https://www.youtube.com/watch?v=eY-edPAF93k
 
+SYMFONY FULL Tutorial with ORM(Relations):
+https://www.youtube.com/watch?v=AaQNYq07-oI&list=PLRkB3CK04Mo8vbftRqjuiwxIkVUtxjeOj
+SYMFONY FULL Tutorial with ORM(Relations):
+https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html
+many to many:
+http://www.inanzzz.com/index.php/post/toza/many-to-many-association-example-in-symfony
 Free Bootstrap Template : https://bootswatch.com/
 https://bootswatch.com/lumen/
-
+...............................
+COMMANDS::
 php bin/console - to show all the commands
 Entity(models) means table model
 
 php bin/console server:run
 php bin/console generate:controller
+if Controller Name : (AppBundle:Category) then it will generate controller class with name (CategoryController), means it append Controller after the class name automatically.
 php bin/console doctrine:database:create
 php bin/console doctrine:generate:entity (folder for table creation)
+php bin/console doctrine:generate:entity Category (generate new category entity(model))
 php bin/console doctrine:generate:entities AppBundle:Post (for generating the getter and setter methods inside entity/model after creating a new field inside entity)
 /////////////////////////generate:(table-columns)('BUNDLE_NAME:ENTITY_NAME')
 php bin/console doctrine:schema:update --force (like migration in laravel)
 php bin/console doctrine:schema:update --dump-sql (dump sql is used to show the sql command in the terminal which is going to run)
 
-
+...............................
+QUERIES::
+Get All Records:
 $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
 ///////////////////////////////('BUNDLE_NAME:ENTITY_NAME')///////
+...............................
+OTHERS::
+EntityType::class (Used in form for select/option, checkboxes, radio)
+...............................
+LOGS DIR :
+var/logs/dev.log
+CONFIG :
+app/config/config.yml
