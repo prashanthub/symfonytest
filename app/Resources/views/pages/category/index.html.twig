@@ -17,6 +17,7 @@
       <th scope="row">{{ categorie.id }}</th>
       <td>{{ categorie.name }}</td>
       <td>
+        <a href="{{ absolute_url(asset('')) }}category/view/{{categorie.id}}" class="btn btn-primary btn-xs">View</a>
       	<a href="{{ absolute_url(asset('')) }}category/delete/{{categorie.id}}" class="btn btn-danger btn-xs">Delete</a>
       </td>
     </tr>

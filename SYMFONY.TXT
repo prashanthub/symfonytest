@@ -1,4 +1,8 @@
 GITHUB REPO : https://github.com/prashanthub/symfonytest
+GITHUB LOGIN DETAILS :
+MAIL : prashantjaiswal2003@gmail.com
+PASS : prashantjaiswal@123
+username : prashanthub
 
 Download and install symfony:
  https://symfony.com/doc/3.3/setup.html
@@ -21,6 +25,7 @@ php bin/console - to show all the commands
 Entity(models) means table model
 
 php bin/console server:run
+php bin/console cache:clear
 php bin/console generate:controller
 if Controller Name : (AppBundle:Category) then it will generate controller class with name (CategoryController), means it append Controller after the class name automatically.
 php bin/console doctrine:database:create
@@ -44,3 +49,75 @@ LOGS DIR :
 var/logs/dev.log
 CONFIG :
 app/config/config.yml
+...............................
+
+USING MIGRATIONS::
+https://symfony.com/doc/1.3/bundles/DoctrineMigrationsBundle/index.html
+https://stackoverflow.com/questions/45590798/best-way-to-migrate-and-regenerate-symfony-3-entities
+1)Run doctrine:generate:entities AppBundle:EntityName (this will create your entity with the new fields).
+2)Run doctrine:migrations:diff (this will automatically check the differences and will create a migration that will affect your DB)
+3)Run doctrine:migrations:migrate to persist the changes to the DB.
+
+https://stackoverflow.com/questions/23339711/doctrine-schema-update-or-doctrine-migrations
+(When you are using the schema:upadte, no history of database modification is kept, and in a production/staging environment this is a big downside. When using migrations, you always see that there are some updates in the migrations folder and all the changes can be seen in migration tables)
+Migrations Commands::
+composer require doctrine/doctrine-migrations-bundle "^1.0"
+php bin/console doctrine:migrations:generate
+php bin/console doctrine:migrations:status --show-versions
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
+migrate down command : php bin/console doctrine:migrations:execute 20190124080904 --down
+
+...............................
+
+Using Custom Function in repository::
+public function findByUsersId($user_id)
+	{
+             // 1st way - using create query
+            return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c FROM AppBundle:Category c where c.user_id = :user_id'
+            )
+            ->setParameter('user_id', $user_id)
+            ->getResult();
+
+            // 2nd way - using create query builder
+            $queryBuilder = $this->createQueryBuilder('c')
+            ->where('c.user_id = :user_id')
+            ->setParameter('user_id', $user_id);
+             $query = $queryBuilder->getQuery();
+             $result= $query->getResult();
+             return $result;
+	}
+..............................
+Using TIMESTAMPABLE(for created_at updated_at fields):
+https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/symfony2.md
+..............................
+One To Many(with mappedBy and InverseBy):
+See entities below:
+// one post can have many comments
+class Post{
+    /**
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="comment_post", cascade={"all"})
+     */
+    private $comments;
+}
+class Comments{
+    /**
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $comment_post;
+}
+..............................
+FORM CUSTOMIZATION:
+ Load full form in 1 line (Twig):
+  {{form(form)}}
+ Add only Form Tag:
+  {{ form_start(form}}
+ Various Form codes:
+  {{ form_label(form.age) }}
+  {{ form_errors(form.age) }}
+  {{ form_widget(form.age) }}
+Add CSRF Token to custom forms:
+  {{ form_widget(form._token) }} 

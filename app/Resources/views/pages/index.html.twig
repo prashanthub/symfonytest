@@ -1,8 +1,8 @@
 {{include('pages/inc/header.html.twig')}}
   <br/>
   <a href="{{ absolute_url(asset('')) }}create" class="btn btn-primary btn-xs">Create Post</a>
-  <a href="{{ absolute_url(asset('')) }}category" class="btn btn-primary btn-xs">View Categories</a>
-  <h3>View Posts</h3>
+  <a href="{{ absolute_url(asset('')) }}category" class="btn btn-primary btn-xs">All Categories</a>
+  <h3>All Posts</h3>
 
   <table class="table table-hover">
   <thead>
@@ -31,6 +31,7 @@
       <td>
       	<a href="{{ absolute_url(asset('')) }}view/{{post.id}}" class="btn btn-primary btn-xs">View</a>
       	<a href="{{ absolute_url(asset('')) }}edit/{{post.id}}" class="btn btn-success btn-xs">Edit</a>
+        <a href="{{ absolute_url(asset('')) }}addCommentToPost/{{post.id}}" class="btn btn-success btn-xs">Add Comment</a>
       	<a href="{{ absolute_url(asset('')) }}delete/{{post.id}}" class="btn btn-danger btn-xs">Delete</a>
       </td>
     </tr>

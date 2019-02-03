@@ -22,6 +22,15 @@ class CategoryController extends Controller
     }
 
     /**
+     * @Route("/category/view/{id}", name="view_category")
+     */
+    public function viewPostAction($id)
+    {
+        $categoryData=$this->getDoctrine()->getRepository('AppBundle:Category')->find($id);
+        return $this->render('pages/category/view.html.twig',['categoryData'=>$categoryData]);
+    }
+
+    /**
      * @Route("/category/delete/{id}", name="delete_category")
      */
     public function deletePostAction(Request $request, $id)

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Comments;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -133,5 +134,35 @@ class PostController extends Controller
 
         $this->addFlash('message', 'Post Deleted Successfully.');
         return $this->redirectToRoute('view_all_posts');
+    }
+
+    
+    /**
+     * @Route("/addCommentToPost/{id}", name="add_comment_to_post")
+     */
+    public function addCommentToPostAction(Request $request, $id)
+    {   
+        $post=$this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+        $comments = new Comments;
+        $form = $this->createFormBuilder($comments)
+        ->add('comment',TextareaType::class,array('attr'=>array('class'=>'form-control')))
+        ->add('save',SubmitType::class,array('label'=>'Add Comment','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
+        ->getForm();
+        $form->handleRequest($request);
+        
+        if($form->isValid() && $form->isSubmitted()){
+            $comment=$form['comment']->getData();
+            $comments->setComment($comment);
+            $comments->setCommentPost($post);
+            $em=$this->getDoctrine()->getManager();
+            // to save
+            $em->persist($comments);
+            $em->flush();
+
+            $this->addFlash('message', 'Comment Added Successfully.');
+            return $this->redirectToRoute('view_all_posts');
+        }
+        return $this->render('pages/addcomment.html.twig',['form'=>$form->createView(), 'post'=>$post]);
+        
     }
 }

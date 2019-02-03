@@ -43,11 +43,15 @@ class Post
      */
     private $category;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="comment_post", cascade={"all"})
+     */
+    private $comments;
+
 
     /**
      * @ORM\Column(name="image", type="string", length=255)
      *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg"  })
      */
     private $image;
@@ -135,5 +139,29 @@ class Post
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Post
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

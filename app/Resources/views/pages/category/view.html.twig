@@ -1,0 +1,27 @@
+{{include('pages/inc/header.html.twig')}}
+  <br/>
+  
+  <h3>View Category</h3>
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">POST</a>
+  <a href="#" class="list-group-item list-group-item-action"><b>Name :</b> {{ categoryData.name }}</a>
+  <a href="#" class="list-group-item list-group-item-action"><b>Posts :</b>
+  <div>
+  {% set id = 1 %}
+  {% for postdata in categoryData.post %}
+      <p>{{id}} . {{ postdata.title }}<br>
+      <b>Comments :</b>
+       <ul>
+        {% for commentdata in postdata.comments %}
+         <li>{{ commentdata.comment }}  (at {{commentdata.createdAt|date("d F, Y H:i:s")}})</li>
+       {% endfor %}
+       </ul>
+      </p>
+
+  {% set id = id + 1 %}
+  {% endfor %}
+  </div>
+   </a>
+
+{{include('pages/inc/footer.html.twig')}}

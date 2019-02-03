@@ -43,6 +43,11 @@ class Post
      */
     private $category;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="comment_post", cascade={"all"})
+     */
+    private $comments;
+
 
     /**
      * @ORM\Column(name="image", type="string", length=255)
@@ -50,6 +55,15 @@ class Post
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg"  })
      */
     private $image;
+    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -158,5 +172,40 @@ class Post
     public function getImage()
     {
         return $this->image;
+    }
+
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     *
+     * @return Post
+     */
+    public function addComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
