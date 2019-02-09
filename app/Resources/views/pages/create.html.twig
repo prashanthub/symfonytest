@@ -1,6 +1,10 @@
 {{include('pages/inc/header.html.twig')}}
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" type="text/css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.min.js" type="text/javascript" ></script>
+
   <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">Back</a>
-  <h3>Create Post</h3>
+  <h3>Create Post<small> (Custom Form)</small></h3>
 
  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
@@ -29,6 +33,15 @@
     </div>
 
     <div class="row form-group">
+      {{ form_label(form.tags, '', { 'label_attr': {'class': 'control-label col-md-2'} }) }}
+      <div class="col-md-10">
+        {{ form_widget(form.tags) }}
+      </div>
+      {{ form_errors(form.tags) }}
+    </div>
+    
+
+    <div class="row form-group">
       {{ form_label(form.image, '', { 'label_attr': {'class': 'control-label col-md-2'} }) }}
       <div class="col-md-10">
         {{ form_widget(form.image) }}
@@ -43,5 +56,9 @@
     </div>
   
   {{ form_widget(form._token) }} 
-
+  <script>
+  $(document).ready(function(){
+  $("#form_tags").select2();
+  });
+  </script>
   {{include('pages/inc/footer.html.twig')}}

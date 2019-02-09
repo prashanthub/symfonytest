@@ -39,15 +39,19 @@ class PostController extends Controller
         'class' => 'AppBundle:Category',
         'choice_label' => 'name'
         ))
+         ->add('tags', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Tags',
+        'multiple'=>true,
+        'choice_label' => 'name'
+        ))
         ->add('image', FileType::class, array('label' => 'Upload File (Image file)',  'required' => false, 'attr'=>array('class'=>'form-control')))
         ->add('save',SubmitType::class,array('label'=>'Create Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
         
-        if($form->isValid() && $form->isSubmitted()){
-            $title=$form['title']->getData();
-            $description=$form['description']->getData();
-            $category=$form['category']->getData();
+        if($form->isSubmitted() && $form->isValid()){
+            
             // image upload start
             $file = $post->getImage();
             $post->setImage("");
@@ -57,10 +61,7 @@ class PostController extends Controller
             $post->setImage($fileName);
             }
             // image upload end
-            $post->setTitle($title);
-            $post->setDescription($description);
-            $post->setCategory($category);
-
+          
             $em=$this->getDoctrine()->getManager();
             // to save
             $em->persist($post);
@@ -100,18 +101,20 @@ class PostController extends Controller
         ->add('save',SubmitType::class,array('label'=>'Update Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
-        if($form->isValid() && $form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
+            /* <<< Not Required */
             $title=$form['title']->getData();
             $description=$form['description']->getData();
             $category=$form['category']->getData();
-
+            /* Not Required >>> */
             $em=$this->getDoctrine()->getManager();
             
             $post=$em->getRepository('AppBundle:Post')->find($id);
+            /* <<< Not Required */
             $post->setTitle($title);
             $post->setDescription($description);
             $post->setCategory($category);
-            
+            /* Not Required >>>*/
             $em->flush();
 
             $this->addFlash('message', 'Post Updated Successfully.');

@@ -56,6 +56,10 @@ class Post
      */
     private $image;
     
+    /**
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="posts")
+     */
+    private $tags;
 
     /**
      * Constructor
@@ -63,6 +67,7 @@ class Post
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -207,5 +212,56 @@ class Post
     public function getComments()
     {
         return $this->comments;
+    }
+
+
+
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     *
+     * @return Post
+     */
+    public function setTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     *
+     * @return Post
+     */
+    public function addTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
     }
 }

@@ -90,10 +90,12 @@ public function findByUsersId($user_id)
              return $result;
 	}
 ..............................
-Using TIMESTAMPABLE(for created_at updated_at fields):
+Using TIMESTAMPABLE extension(for created_at updated_at fields):
 https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/symfony2.md
 ..............................
 One To Many(with mappedBy and InverseBy):
+OneToMany - mappedBy(has to be specified on the inversed side)
+ManyToOne - InverseBy(has to be specified on the owning side)
 See entities below:
 // one post can have many comments
 class Post{
@@ -109,6 +111,25 @@ class Comments{
      */
     private $comment_post;
 }
+...............................
+ManyToMany :
+
+class Post
+{
+   /**
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="posts")
+     */
+    private $tags;
+}
+class Tags
+{
+    /**
+     * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
+     */
+    private $posts;
+}
+for query to search for table post_tags use (Class Post-inversedBy, class Tags-mappedBy)
+for query to search for table tags_post use (Class Post-mappedBy, class Tags-inversedBy)
 ..............................
 FORM CUSTOMIZATION:
  Load full form in 1 line (Twig):

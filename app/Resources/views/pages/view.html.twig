@@ -9,14 +9,23 @@
   <a href="#" class="list-group-item list-group-item-action"><b>Description :</b> {{ postData.description }}</a>
   <a href="#" class="list-group-item list-group-item-action"><b>Category :</b> {{ postData.category.name }}</a>
   <a href="#" class="list-group-item list-group-item-action"><b>Comments :</b>
-  <div>
-  {% set id = 1 %}
-  {% for commentdata in postData.comments %}
-      <p>{{id}} . {{ commentdata.comment }}  (at {{commentdata.createdAt|date("d F, Y H:i:s")}})</p>
-  {% set id = id + 1 %}
-  {% endfor %}
-  </div>
-   </a>
+    <div>
+    {% set id = 1 %}
+    {% for commentdata in postData.comments %}
+        <p>{{id}} . {{ commentdata.comment }}  (at {{commentdata.createdAt|date("d F, Y H:i:s")}})</p>
+    {% set id = id + 1 %}
+    {% endfor %}
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action"><b>Tags :</b>
+    <div>
+    {% set id = 1 %}
+    {% for tagsdata in postData.tags %}
+        <p>{{id}} . {{ tagsdata.name }}</p>
+    {% set id = id + 1 %}
+    {% endfor %}
+    </div>
+  </a>
   <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">BACK</a>
   </div>
 

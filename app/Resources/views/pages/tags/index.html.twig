@@ -1,0 +1,31 @@
+{{include('pages/inc/header.html.twig')}}
+  <br/>
+  <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">Posts</a>
+  <h3>View Tags</h3>
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for tag in tags %}
+    <tr class="table-active">
+      <th scope="row">{{ tag.id }}</th>
+      <td>{{ tag.name }}</td>
+      <td>
+        <a href="{{ absolute_url(asset('')) }}tag/view/{{tag.id}}" class="btn btn-primary btn-xs">View</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr class="table-active">
+      <td>No Tag Found</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+</div>
+{{include('pages/inc/footer.html.twig')}}
