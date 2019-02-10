@@ -98,22 +98,28 @@ class PostController extends Controller
         'class' => 'AppBundle:Category',
         'choice_label' => 'name'
         ))
+        ->add('tags', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Tags',
+        'multiple'=>true,
+        'choice_label' => 'name'
+        ))
         ->add('save',SubmitType::class,array('label'=>'Update Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
         ->getForm();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             /* <<< Not Required */
-            $title=$form['title']->getData();
-            $description=$form['description']->getData();
-            $category=$form['category']->getData();
+            //$title=$form['title']->getData();
+            //$description=$form['description']->getData();
+            //$category=$form['category']->getData();
             /* Not Required >>> */
             $em=$this->getDoctrine()->getManager();
             
-            $post=$em->getRepository('AppBundle:Post')->find($id);
+            //$post=$em->getRepository('AppBundle:Post')->find($id);
             /* <<< Not Required */
-            $post->setTitle($title);
-            $post->setDescription($description);
-            $post->setCategory($category);
+            //$post->setTitle($title);
+            //$post->setDescription($description);
+            //$post->setCategory($category);
             /* Not Required >>>*/
             $em->flush();
 
@@ -167,5 +173,45 @@ class PostController extends Controller
         }
         return $this->render('pages/addcomment.html.twig',['form'=>$form->createView(), 'post'=>$post]);
         
+    }
+
+    
+    /**
+     * @Route("/search", name="search_post")
+     */
+    public function searchPostAction(Request $request){  
+        
+        $post = new Post;
+        $form = $this->createFormBuilder($post)
+        ->add('title',TextType::class,array('attr'=>array('class'=>'form-control'), 'required' => false))
+        ->add('description',TextareaType::class,array('attr'=>array('class'=>'form-control'), 'required' => false))
+        // add category select option
+        ->add('category', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Category',
+        'choice_label' => 'name'
+        ))
+         ->add('tags', EntityType::class, array(
+        'attr'=>array('class'=>'form-control'),
+        'class' => 'AppBundle:Tags',
+        'multiple'=>true,
+        'choice_label' => 'name'
+        ))
+        ->add('save',SubmitType::class,array('label'=>'Search Post','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-top:10px;')))
+        ->getForm();
+        $form->handleRequest($request);
+        $posts=$this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $posts=$this->getDoctrine()->getRepository('AppBundle:Post')->searchPost($post);
+            /*$em=$this->getDoctrine()->getManager();
+            // to save
+            $em->persist($post);
+            $em->flush();
+
+            $this->addFlash('message', 'Post Created Successfully.');
+            return $this->redirectToRoute('view_all_posts');*/
+        }
+        return $this->render('pages/search.html.twig',['form'=>$form->createView(), 'posts'=>$posts]);
     }
 }

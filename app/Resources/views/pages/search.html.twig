@@ -1,7 +1,8 @@
 {{include('pages/inc/header.html.twig')}}
 
+
   <a href="{{ absolute_url(asset('')) }}post" class="btn btn-primary btn-xs">Back</a>
-  <h3>Create Post<small> (Custom Form)</small></h3>
+  <h3>Search Post<small> (Custom Form)</small></h3>
 
  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
@@ -36,15 +37,6 @@
       </div>
       {{ form_errors(form.tags) }}
     </div>
-    
-
-    <div class="row form-group">
-      {{ form_label(form.image, '', { 'label_attr': {'class': 'control-label col-md-2'} }) }}
-      <div class="col-md-10">
-        {{ form_widget(form.image) }}
-      </div>
-      {{ form_errors(form.image) }}
-    </div>
 
     <div class="row form-group">        
       <div class="col-md-offset-2 col-md-10">
@@ -53,6 +45,42 @@
     </div>
   
   {{ form_widget(form._token) }} 
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts %}
+    <tr class="table-active">
+      <td>{{ post.title }}</td>
+      <td>{{ post.description }}</td>
+      <td>{{ post.category.name }}</td>
+      <td>
+      {% for tag in post.tags %}
+      {{tag.name}}
+      {% if not loop.last %},{% endif %}
+      {% endfor %}
+      </td>
+    </tr>
+    {% else %}
+    <tr class="table-active">
+      <td>No Post Found</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+
+
+
+
+
   <script>
   $(document).ready(function(){
   $("#form_tags").select2();

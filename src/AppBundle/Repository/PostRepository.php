@@ -10,4 +10,45 @@ namespace AppBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function searchPost($post)
+	{
+        $title=$post->getTitle();
+        $description=$post->getDescription();
+        $category=$post->getCategory()->getId();
+        $arraytagIds=[];
+        foreach($post->getTags() as $tags){
+        	$arraytagIds[]=$tags->getId();
+        }
+        $result = $this->createQueryBuilder('post')->select('post');
+        $result = $result->Join('post.tags', 'commonTable');
+        $result = $result->Join('AppBundle:Tags', 't');
+        if($category){
+            $result = $result->where('post.category = :category')->setParameter('category', $category);
+        }
+        if($title){
+            $result = $result->andWhere('post.title = :title')->setParameter('title', $title);
+        }
+        if($description){
+	        $result = $result->andWhere('post.description = :description')->setParameter('description', $description);
+        }
+        $result = $result->andWhere("t.id IN(:tagIds)");
+        $result = $result->setParameter('tagIds', array_values($arraytagIds));
+        $result = $result->getQuery();
+        //echo $sql = $result->getSQL();die;
+        $result = $result->getResult();
+
+        return $result;
+
+         /*$result = $this->createQueryBuilder('c')
+        ->select('c')
+        ->leftJoin('MyBundleName:ChildOne', 'co', 'WITH', 'co.id = c.id')
+        ->leftJoin('MyBundleName:ChildTwo', 'ct', 'WITH', 'ct.id = c.id')
+        ->orderBy('c.createdAt', 'DESC')
+        ->where('co.group = :group OR ct.group = :group')
+        ->setParameter('group', $group)
+        ->getQuery()->getResult();
+        return $result; */
+
+
+	}
 }

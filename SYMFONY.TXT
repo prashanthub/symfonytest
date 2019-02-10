@@ -81,7 +81,7 @@ public function findByUsersId($user_id)
             ->setParameter('user_id', $user_id)
             ->getResult();
 
-            // 2nd way - using create query builder
+            // 2nd way - using create query builder (best way)
             $queryBuilder = $this->createQueryBuilder('c')
             ->where('c.user_id = :user_id')
             ->setParameter('user_id', $user_id);
@@ -142,3 +142,7 @@ FORM CUSTOMIZATION:
   {{ form_widget(form.age) }}
 Add CSRF Token to custom forms:
   {{ form_widget(form._token) }} 
+
+................................
+Using Bundles ::
+FOSUserBundle : https://symfony.com/doc/master/bundles/FOSUserBundle/index.html
