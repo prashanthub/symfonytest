@@ -3,7 +3,12 @@ GITHUB LOGIN DETAILS :
 MAIL : prashantjaiswal2003@gmail.com
 PASS : prashantjaiswal@123
 username : prashanthub
-
+..............................
+Project Login ::
+Mail : prashantjaiswal2003@gmail.com
+User : prashant
+Pass : prashant
+..............................
 Download and install symfony:
  https://symfony.com/doc/3.3/setup.html
 SYMFONY 3 :
@@ -144,5 +149,19 @@ Add CSRF Token to custom forms:
   {{ form_widget(form._token) }} 
 
 ................................
+Swift Mailer setting :
+    mailer_transport: gmail
+    mailer_encryption: ssl    
+    mailer_port: 25     
+    mailer_host: smtp.gmail.com
+    mailer_user: prashantjaiswal2003@gmail.com
+    mailer_password: prashant2003
+................................
 Using Bundles ::
 FOSUserBundle : https://symfony.com/doc/master/bundles/FOSUserBundle/index.html
+ByDefault Routes :
+- /resetting/request 
+- /login
+- /register
+- /logout
+
