@@ -13,10 +13,16 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        //return $this->render('default/index.html.twig', [
-        //    'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        //]);
+        /*
+        // Check User Type
+        $auth_checker = $this->get('security.authorization_checker');
+        $isRoleUser = $auth_checker->isGranted('ROLE_USER');
+
+        // Get User Details
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();*/
+
         return $this->redirectToRoute('view_all_posts');
     }
+
 }

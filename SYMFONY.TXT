@@ -11,8 +11,11 @@ Pass : prashant
 ..............................
 Download and install symfony:
  https://symfony.com/doc/3.3/setup.html
-SYMFONY 3 :
+
+SYMFONY 3 LEARN:
 https://www.tutorialspoint.com/symfony/
+https://symfony.com/pdf/Symfony_cookbook_3.1.pdf
+
 SYMFONY 3 CRUD OPERATION Tutorial:
 https://www.youtube.com/watch?v=eY-edPAF93k
 
@@ -24,13 +27,17 @@ many to many:
 http://www.inanzzz.com/index.php/post/toza/many-to-many-association-example-in-symfony
 Free Bootstrap Template : https://bootswatch.com/
 https://bootswatch.com/lumen/
-...............................
+.................................
+Routes ::
+homepage - By default route, it take us to the homepage/BaseURL.
+.................................
 COMMANDS::
 php bin/console - to show all the commands
 Entity(models) means table model
 
 php bin/console server:run
 php bin/console cache:clear
+php bin/console debug:router(To view all the routes - you can create route languagewise also, means different route for diferent languages * @Route({"nl": "/over-ons","en": "/about-us"}, name="about_us"))
 php bin/console generate:controller
 if Controller Name : (AppBundle:Category) then it will generate controller class with name (CategoryController), means it append Controller after the class name automatically.
 php bin/console doctrine:database:create
@@ -164,4 +171,13 @@ ByDefault Routes :
 - /login
 - /register
 - /logout
+
+-Do not open login page if user is logged in::
+https://coderwall.com/p/w0yyag/redirect-authenticated-user-on-anonymous-pages-in-symfony
+
+-How to redirect an user to a specific page according to his role in Symfony 2.8 using an EventListener::
+https://ourcodeworld.com/articles/read/743/how-to-redirect-an-user-to-a-specific-page-according-to-his-role-in-symfony-2-8-using-an-eventlistener
+
+-override dufault error template
+https://symfony.com/doc/3.3/controller/error_pages.html#overriding-the-default-error-templates
 
