@@ -1,13 +1,23 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+   <head>
+       <meta charset="UTF-8" />
+       <title>{% block title %}Welcome!{% endblock %}</title>
+       {% block stylesheets %}{% endblock %}
+       <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+       <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+       <link rel="stylesheet"  href="{{ absolute_url(asset('css/bootstrap.min.css')) }}" />
+       <link rel="stylesheet"  href="{{ absolute_url(asset('css/custom.css')) }}" />
+   </head>
+ 
+   <body>
+ 
+   <div class="container frontside">
+   {% block content %}{% endblock %}
+   </div>
+        <script src="{{ absolute_url(asset('js/jquery.min.js')) }}"></script>
+        <script src="h{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>
+        <script src="{{ absolute_url(asset('js/custom.js')) }}"></script>
+       {% block javascripts %}{% endblock %}
+ 
+   </body>
 </html>

@@ -39,5 +39,11 @@ services:
         arguments:
             - "@security.token_storage"
             - "@router"
+            - "@security.authorization_checker"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }

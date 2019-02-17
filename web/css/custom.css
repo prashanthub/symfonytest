@@ -12,3 +12,7 @@ body{
 .designation{
 	width:90%;
 }
+.frontside{
+	top: 20%;
+    position: relative;
+}

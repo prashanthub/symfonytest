@@ -1,0 +1,64 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="formgroup">
+  <h1>PostWeb Register</h1>
+</div>
+{% if not form.vars.valid %}
+<div class="alert alert-danger">
+  {{ form_errors(form.first_name) }}
+  {{ form_errors(form.last_name) }}
+  {{ form_errors(form.email) }}
+  {{ form_errors(form.username) }}
+  {{ form_errors(form.address) }}
+  {{ form_errors(form.plainPassword.first) }}
+  {{ form_errors(form.plainPassword.second) }}
+</div>
+{% endif %}
+<form action="{{ path("fos_user_registration_register") }}" method="post" class="fos_user_registration_register">
+   {{ form_widget(form._token) }}
+    <div class="formgroup">
+      {{ form_label(form.email) }}
+      {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+      
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.username) }}
+      {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+      
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.plainPassword.first) }}
+      {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.plainPassword.second) }}
+      {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.first_name) }}
+      {{ form_widget(form.first_name, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.last_name) }}
+      {{ form_widget(form.last_name, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <div class="formgroup">
+      {{ form_label(form.address) }}
+      {{ form_widget(form.address, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+  
+    
+    <div>
+        <input type="submit" class="btn btn-success" value="{{ 'registration.submit'|trans }}" />
+    </div>
+</form>
+{% endblock fos_user_content %}
