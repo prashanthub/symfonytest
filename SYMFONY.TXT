@@ -143,6 +143,14 @@ class Tags
 for query to search for table post_tags use (Class Post-inversedBy, class Tags-mappedBy)
 for query to search for table tags_post use (Class Post-mappedBy, class Tags-inversedBy)
 ..............................
+CASCADE OPTION IN RELATIONS ::
+persist, remove, merge, detach, refresh or all.
+If cascading is set then you dont have to manually delete the entries from the other table eg. if user is deleted then his comments will automatically deleted from user_comment table, if cascading not set then we have to manually delete the entries from both the tables.
+ORPHANREMOVAL ::
+Say your User has one-to-many relation to Comment. If you are using cascade="remove", you can remove the reference for Comment from one User, and then attach that Comment to another User. When you persist them, they will be correctly saved. But if you are using orphanRemoval=true, even if you will remove given Comment from one User, and then attach to another User, this comment will be deleted during persist, because the reference has been deleted.
+
+CONCLUSION :: we should use cascade="all" and do not use orphanremoval=true in relations
+..............................
 FORM CUSTOMIZATION:
  Load full form in 1 line (Twig):
   {{form(form)}}

@@ -40,6 +40,11 @@ class User extends BaseUser
      
        protected $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="user", cascade={"all"})
+     */
+    private $posts;
+
 
     /**
      * Get id
@@ -97,5 +102,29 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->last_name;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

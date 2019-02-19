@@ -44,6 +44,12 @@ class Post
     private $category;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $user;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comments", mappedBy="comment_post", cascade={"all"})
      */
     private $comments;
@@ -263,5 +269,29 @@ class Post
         $this->tags[] = $tag;
 
         return $this;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Post
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
