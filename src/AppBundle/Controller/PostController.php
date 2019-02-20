@@ -18,10 +18,10 @@ class PostController extends Controller
      * @Route("/post", name="view_all_posts")
      */
     public function showAllPostsAction(Request $request)
-    {   $user = $this->get('security.token_storage')->getToken();
-        //echo "<pre>";print_r($user);die;
-    	$posts=$this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
-        return $this->render('pages/index.html.twig',['posts'=>$posts]);
+    {   $user = $this->get('security.token_storage')->getToken()->getUser();
+        // Get posts according to the user
+        $userFullObject=$this->getDoctrine()->getRepository('AppBundle:User')->find($user->getId());
+        return $this->render('pages/index.html.twig',['posts'=>$userFullObject->getPosts()]);
     }
 
     

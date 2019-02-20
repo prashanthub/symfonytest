@@ -46,6 +46,13 @@ class User extends BaseUser
     private $posts;
 
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roles = array('ROLE_USER');
+    }
+
+
     /**
      * Get id
      *
