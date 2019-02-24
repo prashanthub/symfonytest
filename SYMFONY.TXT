@@ -4,10 +4,15 @@ MAIL : prashantjaiswal2003@gmail.com
 PASS : prashantjaiswal@123
 username : prashanthub
 ..............................
-Project Login ::
+Project User Login ::
 Mail : prashantjaiswal2003@gmail.com
 User : prashant
 Pass : prashant
+
+Project Admin Login ::
+Mail : admin@gmail.com
+User : admin
+Pass : admin@123
 ..............................
 Download and install symfony:
  https://symfony.com/doc/3.3/setup.html
@@ -179,6 +184,7 @@ ByDefault Routes :
 - /login
 - /register
 - /logout
+- /admin/login
 
 -Do not open login page if user is logged in::
 https://coderwall.com/p/w0yyag/redirect-authenticated-user-on-anonymous-pages-in-symfony
@@ -194,4 +200,6 @@ https://stackoverflow.com/questions/43947102/symfony-check-user-authorization-in
 https://www.cloudways.com/blog/overriding-default-fosuserbundle-templates/
 -adding more fields to FOSuserBundle registration form
 https://www.cloudways.com/blog/overriding-default-registration-form-fosuserbundle/
+-adding admin login route to FOSUserBundle
+https://github.com/FriendsOfSymfony/FOSUserBundle/issues/849
 

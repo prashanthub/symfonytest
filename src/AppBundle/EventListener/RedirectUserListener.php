@@ -31,7 +31,7 @@ class RedirectUserListener
         $currentRoute=$_SERVER['REQUEST_URI'];
         $isLoginRoute=in_array('login',explode('/',$currentRoute));
         $isResetPasswordRoute=in_array('resetting',explode('/',$currentRoute));
-        $isAnonymous=in_array('register',explode('/',$currentRoute));
+        $isAnonymous=(in_array('register',explode('/',$currentRoute)) || in_array('admin',explode('/',$currentRoute)));
         $isRouteCorrect=($isLoginRoute || $isResetPasswordRoute);
         //$granted=$this->authorizationChecker->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
             if ($this->isUserLogged()) {
