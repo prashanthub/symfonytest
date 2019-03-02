@@ -34,6 +34,7 @@ class RedirectUserListener
         $isAnonymous=(in_array('register',explode('/',$currentRoute)) || in_array('admin',explode('/',$currentRoute)));
         $isRouteCorrect=($isLoginRoute || $isResetPasswordRoute);
         //$granted=$this->authorizationChecker->isGranted('IS_AUTHENTICATED_ANONYMOUSLY');
+       
             if ($this->isUserLogged()) {
                 if($isRouteCorrect){
                     $response = new RedirectResponse($this->router->generate('homepage'));

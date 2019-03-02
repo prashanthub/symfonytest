@@ -22,6 +22,13 @@ class DefaultController extends Controller
         $token = $this->get('security.token_storage')->getToken();
         $user = $token->getUser();*/
 
+
+        $auth_checker = $this->get('security.authorization_checker');
+        // Redirect to Admin if role is Admin
+        if ($auth_checker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_homepage');
+        } 
+
         return $this->redirectToRoute('view_all_posts');
     }
 

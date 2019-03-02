@@ -202,4 +202,7 @@ https://www.cloudways.com/blog/overriding-default-fosuserbundle-templates/
 https://www.cloudways.com/blog/overriding-default-registration-form-fosuserbundle/
 -adding admin login route to FOSUserBundle
 https://github.com/FriendsOfSymfony/FOSUserBundle/issues/849
+..................................................................
+
+https://stackoverflow.com/questions/54956242/admin-login-not-working-in-fosuserbundle-symfony-3-3
 

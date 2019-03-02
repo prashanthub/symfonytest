@@ -4,6 +4,10 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
@@ -27,9 +31,11 @@ security:
             security: false
 
         admin:
-            pattern:            /admin(.*)
+            pattern:            ^/admin
+            user_checker: fos_user.user_checker
             form_login:
                 provider:       fos_userbundle
+                csrf_token_generator:  security.csrf.token_manager
                 login_path:     /admin/login
                 check_path:     /admin/login_check
                 default_target_path: /admin/
@@ -56,3 +62,7 @@ security:
         - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN

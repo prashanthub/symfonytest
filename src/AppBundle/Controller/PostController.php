@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Post;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Comments;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -215,4 +217,24 @@ class PostController extends Controller
         }
         return $this->render('pages/search.html.twig',['form'=>$form->createView(), 'posts'=>$posts]);
     }
+
+
+    /** 
+       * @Route("/getuser_ajax", name="get_post_user")
+    */ 
+    public function ajaxAction(Request $request) { 
+       $id=8; 
+       $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);  
+          
+       if ($request->isXmlHttpRequest()) {  
+          $jsonData = array();    
+           
+             $temp = array(
+                'name' => $post->getUser()->getUsername()   
+             );   
+             $jsonData[] = $temp;  
+         
+          return new JsonResponse($jsonData); 
+       }
+    } 
 }

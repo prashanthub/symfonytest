@@ -1,0 +1,36 @@
+{{include('pages/inc/header.html.twig')}}
+  <br/>
+
+  <h3>View All Users</h3>
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in allUserData %}
+    {% if "ROLE_ADMIN" not in user.roles %}
+    <tr class="table-active">
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.firstname }} {{ user.lastname }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <a href="{{ absolute_url(asset('')) }}admin/deleteuser/{{user.id}}" class="btn btn-danger btn-xs">Delete</a>
+      </td>
+    </tr>
+    {% endif %}
+    {% else %}
+    <tr class="table-active">
+      <td>No User Found</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+</div>
+{{include('pages/inc/footer.html.twig')}}
