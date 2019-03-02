@@ -223,7 +223,7 @@ class PostController extends Controller
        * @Route("/getuser_ajax", name="get_post_user")
     */ 
     public function ajaxAction(Request $request) { 
-       $id=8; 
+       $id=$request->get('postid');
        $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);  
           
        if ($request->isXmlHttpRequest()) {  
