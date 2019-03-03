@@ -43,7 +43,13 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="user", cascade={"all"})
      */
-    private $posts;
+       private $posts;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="Userinfo", cascade={"all"})
+     */
+      protected $userinfo;
 
 
     public function __construct()
@@ -167,5 +173,30 @@ class User extends BaseUser
     public function getPosts()
     {
         return $this->posts;
+    }
+
+
+    /**
+     * Set userinfo
+     *
+     * @param \AppBundle\Entity\Userinfo $userinfo
+     *
+     * @return User
+     */
+    public function setUserinfo(\AppBundle\Entity\Userinfo $userinfo = null)
+    {
+        $this->userinfo = $userinfo;
+
+        return $this;
+    }
+
+    /**
+     * Get userinfo
+     *
+     * @return \AppBundle\Entity\Userinfo
+     */
+    public function getUserinfo()
+    {
+        return $this->userinfo;
     }
 }

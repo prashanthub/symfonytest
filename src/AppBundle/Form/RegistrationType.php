@@ -15,6 +15,7 @@ class RegistrationType extends AbstractType
        $builder->add('first_name');
        $builder->add('last_name');
        $builder->add('address');
+       $builder->add('userinfo', "AppBundle\Form\UserInfoType", array('data_class' => 'AppBundle\Entity\UserInfo'));
    }
  
    public function getParent()

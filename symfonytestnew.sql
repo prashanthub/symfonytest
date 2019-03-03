@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2019 at 01:54 PM
+-- Generation Time: Mar 03, 2019 at 02:33 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -150,6 +150,25 @@ INSERT INTO `tags` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `userinfo`
+--
+
+CREATE TABLE IF NOT EXISTS `userinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phonenumber` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `userinfo`
+--
+
+INSERT INTO `userinfo` (`id`, `phonenumber`) VALUES
+(1, 44444);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -166,24 +185,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   `confirmation_token` varchar(180) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_requested_at` datetime DEFAULT NULL,
   `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
-  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `userinfo_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_1483A5E992FC23A8` (`username_canonical`),
   UNIQUE KEY `UNIQ_1483A5E9A0D96FBF` (`email_canonical`),
-  UNIQUE KEY `UNIQ_1483A5E9C05FB297` (`confirmation_token`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+  UNIQUE KEY `UNIQ_1483A5E9C05FB297` (`confirmation_token`),
+  UNIQUE KEY `UNIQ_1483A5E9C1EA3D46` (`userinfo_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `first_name`, `last_name`, `address`) VALUES
-(5, 'prashantas', 'prashantas', 'prashantjaiswaasl2003@gmail.com', 'prashantjaiswaasl2003@gmail.com', 0, NULL, '$2y$13$ofsEkamP4.ar0KsdsjzKyuerYM8Y0/J9G2CDEeugYGI3iTqZSkdSy', NULL, 'q0KkX-bUmo8nNQbaPZGRglWecybjDSENawqriB8XDiQ', NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', '', '', ''),
-(7, 'Prashant', 'prashant', 'prashantjaiswal2003@gmail.com', 'prashantjaiswal2003@gmail.com', 1, NULL, '$2y$13$KzdD.sPcts4n3F8iayD05e1cmvoUbRAnr/eIm3B3nK7qk31PiTBhC', '2019-03-02 12:56:53', NULL, NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', 'Prashant', 'Jaiswal', 'Mohali 5 phase'),
-(8, 'asdas', 'asdas', 'prashantsdaajaiswal2003@gmail.com', 'prashantsdaajaiswal2003@gmail.com', 0, NULL, '$2y$13$E5pT5jtnB2yMwQafWfdPb.nXoxmVJH4CrvoYIBdsKyDNSPDxVTAi2', NULL, '0jrFeG4xf993YVc_dPYRf5sqvJTxaBtaroKcCNC4WeU', NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', 'sdfewwe', 'rwe', 'eter'),
-(12, 'admin', 'admin', 'admin@gmail.com', 'admin@gmail.com', 1, NULL, '$2y$13$p3GHZA/FbUAeb8/Q8f.0re74cpblrkGwAUoLJdQ1Imzo5pJqYjEWG', '2019-03-02 11:17:25', NULL, NULL, 'a:2:{i:0;s:9:"ROLE_USER";i:1;s:10:"ROLE_ADMIN";}', 'Admin', NULL, NULL);
+INSERT INTO `users` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `first_name`, `last_name`, `address`, `userinfo_id`) VALUES
+(5, 'prashantas', 'prashantas', 'prashantjaiswaasl2003@gmail.com', 'prashantjaiswaasl2003@gmail.com', 0, NULL, '$2y$13$ofsEkamP4.ar0KsdsjzKyuerYM8Y0/J9G2CDEeugYGI3iTqZSkdSy', NULL, 'q0KkX-bUmo8nNQbaPZGRglWecybjDSENawqriB8XDiQ', NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', '', '', '', NULL),
+(7, 'Prashant', 'prashant', 'prashantjaiswal2003@gmail.com', 'prashantjaiswal2003@gmail.com', 1, NULL, '$2y$13$KzdD.sPcts4n3F8iayD05e1cmvoUbRAnr/eIm3B3nK7qk31PiTBhC', '2019-03-02 12:56:53', NULL, NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', 'Prashant', 'Jaiswal', 'Mohali 5 phase', NULL),
+(8, 'asdas', 'asdas', 'prashantsdaajaiswal2003@gmail.com', 'prashantsdaajaiswal2003@gmail.com', 0, NULL, '$2y$13$E5pT5jtnB2yMwQafWfdPb.nXoxmVJH4CrvoYIBdsKyDNSPDxVTAi2', NULL, '0jrFeG4xf993YVc_dPYRf5sqvJTxaBtaroKcCNC4WeU', NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', 'sdfewwe', 'rwe', 'eter', NULL),
+(12, 'admin', 'admin', 'admin@gmail.com', 'admin@gmail.com', 1, NULL, '$2y$13$p3GHZA/FbUAeb8/Q8f.0re74cpblrkGwAUoLJdQ1Imzo5pJqYjEWG', '2019-03-03 14:03:52', NULL, NULL, 'a:2:{i:0;s:9:"ROLE_USER";i:1;s:10:"ROLE_ADMIN";}', 'Admin', '', '', NULL),
+(13, 'sdfef', 'sdfef', 'asdas@fff.gg', 'asdas@fff.gg', 1, NULL, '$2y$13$lDZ7w3CKH18rUtV/ETg.de59hXxein/iYosSLm4jxUuVc9iMbbPJW', '2019-03-03 13:58:41', NULL, NULL, 'a:1:{i:0;s:9:"ROLE_USER";}', 'ddd', 'fff', 'dfdsf', 1);
 
 --
 -- Constraints for dumped tables
@@ -208,6 +230,12 @@ ALTER TABLE `post`
 ALTER TABLE `post_tags`
   ADD CONSTRAINT `FK_A6E9F32D4B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_A6E9F32D8D7B4FB4` FOREIGN KEY (`tags_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `FK_1483A5E9C1EA3D46` FOREIGN KEY (`userinfo_id`) REFERENCES `userinfo` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -10,6 +10,7 @@
       <th scope="col">Name</th>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
+      <th scope="col">Phone</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,13 @@
       <td>{{ user.firstname }} {{ user.lastname }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.email }}</td>
+      <td>
+        {% if user.userinfo is not null %}
+          {{ user.userinfo.phonenumber }}
+          {% else %}
+          Not Added
+        {% endif %}
+      </td>
       <td>
         <a href="{{ absolute_url(asset('')) }}admin/deleteuser/{{user.id}}" class="btn btn-danger btn-xs">Delete</a>
       </td>

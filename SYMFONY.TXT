@@ -110,6 +110,17 @@ public function findByUsersId($user_id)
 Using TIMESTAMPABLE extension(for created_at updated_at fields):
 https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/symfony2.md
 ..............................
+One To One - Unidirectional (one column in user table generated automatically - in this case userinfo_id column in user table generated automatically)
+Class User{
+       /**
+     * @ORM\OneToOne(targetEntity="Userinfo", cascade={"all"})
+     */
+      protected $userinfo;
+}
+class Userinfo{
+     
+}
+..............................
 One To Many(with mappedBy and InverseBy):
 OneToMany - mappedBy(has to be specified on the inversed side)
 ManyToOne - InverseBy(has to be specified on the owning side)
@@ -129,7 +140,7 @@ class Comments{
     private $comment_post;
 }
 ...............................
-ManyToMany :
+ManyToMany :(common table generated automatically)
 
 class Post
 {
