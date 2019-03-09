@@ -51,11 +51,17 @@ class User extends BaseUser
      */
       protected $userinfo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Userskill", mappedBy="uskill", cascade={"all"}) 
+    */
+    protected $skills;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->roles = array('ROLE_USER');
+
     }
 
 
@@ -198,5 +204,41 @@ class User extends BaseUser
     public function getUserinfo()
     {
         return $this->userinfo;
+    }
+
+
+
+    /**
+     * Add skill
+     *
+     * @param \AppBundle\Entity\Userskill $skill
+     *
+     * @return User
+     */
+    public function addSkill(\AppBundle\Entity\Userskill $skill)
+    {
+        $this->skills[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param \AppBundle\Entity\Userskill $skill
+     */
+    public function removeSkill(\AppBundle\Entity\Userskill $skill)
+    {
+        $this->skills->removeElement($skill);
+    }
+
+    /**
+     * Get skills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
     }
 }

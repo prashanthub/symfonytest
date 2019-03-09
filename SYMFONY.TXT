@@ -213,7 +213,18 @@ https://www.cloudways.com/blog/overriding-default-fosuserbundle-templates/
 https://www.cloudways.com/blog/overriding-default-registration-form-fosuserbundle/
 -adding admin login route to FOSUserBundle
 https://github.com/FriendsOfSymfony/FOSUserBundle/issues/849
-..................................................................
+using form-collection to allow_add option for one to many relation in forms
+https://codereviewvideos.com/course/symfony2-form-collection-tutorial/video/adding-new-items-to-our-collection
+https://symfony.com/doc/3.3/form/form_collections.html
+<!--<div class="formgroup">
+    <ul class="skills" data-prototype="{{ form_widget(form.skills.vars.prototype)|e }}">
+            
+        </ul>
+ </div> -->
+ 
+    <div class="formgroup">
+      {{ form_label(form.skills.skillname) }}
+      {{ form_widget(form.skills.skillname, { 'attr': {'class': 'form-control'} }) }}
+    </div> 
 
-https://stackoverflow.com/questions/54956242/admin-login-not-working-in-fosuserbundle-symfony-3-3
 
